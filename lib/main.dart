@@ -1,3 +1,5 @@
+import 'package:delice_bko/Composants/navbar.dart';
+import 'package:delice_bko/Composants/splash_screen.dart';
 import 'package:delice_bko/Pages/accueil.dart';
 import 'package:delice_bko/Pages/connexion.dart';
 import 'package:delice_bko/Pages/inscription.dart';
@@ -42,7 +44,9 @@ class MyApp extends StatelessWidget {
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       // home: const PageConnexion(),
       // home: const PageInscription(),
-      home: const PageAccueil(),
+      // home: const PageAccueil(),
+      home:  const BottomNavBar(),
+      // home:  const SplashScreen(),
     );
   }
 }

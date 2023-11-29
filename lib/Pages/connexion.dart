@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:delice_bko/Composants/navbar.dart';
 import 'package:delice_bko/Pages/accueil.dart';
 import 'package:delice_bko/Pages/inscription.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -49,7 +50,7 @@ class _PageConnexionState extends State<PageConnexion> {
         // ignore: use_build_context_synchronously
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const PageAccueil()),
+          MaterialPageRoute(builder: (context) => const BottomNavBar()),
         );
         
       } catch (e) {
