@@ -18,12 +18,18 @@ void main() async {
 }
 
 class _PageAccueilState extends State<PageAccueil> {
+
+   bool isLoading = true;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   FirebaseStorage storage = FirebaseStorage.instance;
 
   List<Map<String, dynamic>> restau = [];
 
   Future<void> getData() async {
+     setState(() {
+                    isLoading = true; // Démarre l'indicateur de chargement
+                  });
+
     QuerySnapshot<Map<String, dynamic>> collectionSnapshot =
         await firestore.collection('restaurants').get();
 
@@ -48,6 +54,9 @@ class _PageAccueilState extends State<PageAccueil> {
     });
 
     print(restau);
+    setState(() {
+    isLoading = false; // Arrête l'indicateur de chargement
+  });
   }
 
   @override
@@ -100,6 +109,16 @@ class _PageAccueilState extends State<PageAccueil> {
                     ),
                   ),
                 ),
+                  // Indicateur de chargement
+            if (isLoading)
+              Positioned.fill(
+                child: Container(
+                  color: Colors.black.withOpacity(0.5),
+                  child: const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              ),
                 const Positioned(
                   top: 90,
                   right: 15,

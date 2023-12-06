@@ -1,4 +1,6 @@
+import 'package:delice_bko/Services/currentUser.dart';
 import 'package:flutter/material.dart';
+
 
 class PageProfile extends StatefulWidget {
   const PageProfile({Key? key}) : super(key: key);
@@ -9,13 +11,15 @@ class PageProfile extends StatefulWidget {
 
 class _PageProfileState extends State<PageProfile> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  final CurrentUser _currentUser = CurrentUser();
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
   }
-    // Fonction de déconnexion
+
+  // Fonction de déconnexion
   void _logout() {
     // Ajoutez ici le code pour gérer la déconnexion, par exemple, utilisez FirebaseAuth
     // FirebaseAuth.instance.signOut();
@@ -46,7 +50,6 @@ class _PageProfileState extends State<PageProfile> with SingleTickerProviderStat
               stops: [0.10, 1.2585],
               colors: [
                 Color.fromARGB(176, 255, 128, 0),
-
                 Colors.white,
               ],
             ),
@@ -55,6 +58,8 @@ class _PageProfileState extends State<PageProfile> with SingleTickerProviderStat
             alignment: Alignment.topCenter,
             child: Stack(
               children: [
+                // ... le reste du code sans modification
+                
                 Positioned(
                   top: 0,
                   left: 0,
@@ -90,6 +95,7 @@ class _PageProfileState extends State<PageProfile> with SingleTickerProviderStat
                     ),
                   ),
                 ),
+
                 Positioned(
                   top: 200,
                   left: 20,
@@ -105,27 +111,34 @@ class _PageProfileState extends State<PageProfile> with SingleTickerProviderStat
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-      // ==================NOM UTILISATEUR   ===================== 
-                          const Padding(
-                            padding: EdgeInsets.only(top:8.0,bottom: 8.0),
-                            child: Center(
-                              child: Text('Nom D\'tilisateur',
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              ),                            
-                            ),
+                          // ==================NOM UTILISATEUR   =====================
+                          FutureBuilder<String>(
+                            future: _currentUser.getUser(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return Text('Erreur : ${snapshot.error}');
+                              } else {
+                                String username = snapshot.data ?? 'Nom non trouvé';
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                                  child: Center(
+                                    child: Text(
+                                      username,
+                                      style: const TextStyle(
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
                           ),
 
-                          const Center(
-                            child: Text('Nom complet',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              color: Colors.grey,
-                            ),
-                            ),                            
-                          ),
+                          // ... le reste du code sans modification
+                          
  // ==================ADRESSE MAIL DE L'UTILISATEUR ===================== 
                           const Padding(
                             padding: EdgeInsets.only(top:8.0,bottom: 8.0),
@@ -140,7 +153,7 @@ class _PageProfileState extends State<PageProfile> with SingleTickerProviderStat
                           ),
 
                           const Center(
-                            child: Text('exempl@gmail.com',
+                            child: Text('moussa@gmail.com',
                             style: TextStyle(
                               fontSize: 16.0,
                               color: Colors.grey,
@@ -194,25 +207,22 @@ class _PageProfileState extends State<PageProfile> with SingleTickerProviderStat
                             ),                            
                           ),
 
-                           Positioned(
-                                top: 300,
-                                left: 50,
-                                right: 50,
-                                bottom: 0,
-                                child: Center(
-                                  child: ElevatedButton(
-                                    onPressed: _logout,
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Colors.red, // Couleur de fond du bouton
-                                      onPrimary: Colors.white, // Couleur du texte du bouton
-                                    ),
-                                    child: const Text('Déconnexion'),
-                                  ),
+                          Positioned(
+                            top: 300,
+                            left: 50,
+                            right: 50,
+                            bottom: 0,
+                            child: Center(
+                              child: ElevatedButton(
+                                onPressed: _logout,
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.red, // Couleur de fond du bouton
+                                  onPrimary: Colors.white, // Couleur du texte du bouton
                                 ),
-                              )
-                   
-                          
-                          // Ajoutez d'autres informations du profil ici
+                                child: const Text('Déconnexion'),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),

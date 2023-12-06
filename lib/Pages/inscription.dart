@@ -232,7 +232,7 @@ class _PageInscriptionState extends State<PageInscription> {
                         createUser();
                          Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const PageAccueil()),
+                              MaterialPageRoute(builder: (context) => const PageConnexion()),
                             );
                       }
                     },

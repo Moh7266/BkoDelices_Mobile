@@ -1,8 +1,10 @@
 import 'package:delice_bko/Composants/navbar.dart';
 import 'package:delice_bko/Composants/splash_screen.dart';
 import 'package:delice_bko/Pages/accueil.dart';
+import 'package:delice_bko/Pages/commandes.dart';
 import 'package:delice_bko/Pages/connexion.dart';
 import 'package:delice_bko/Pages/inscription.dart';
+import 'package:delice_bko/Pages/passecommande.dart';
 import 'package:delice_bko/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -43,9 +45,11 @@ class MyApp extends StatelessWidget {
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       // home: const PageConnexion(),
-      // home: const PageInscription(),
+      home: const PageInscription(),
       // home: const PageAccueil(),
-      home:  const BottomNavBar(),
+      // home:  const BottomNavBar(),
+      // home:  const PasseCommande(),
+      // home:  const PageCommandes(),
       // home:  const SplashScreen(),
     );
   }

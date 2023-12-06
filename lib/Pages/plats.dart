@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:delice_bko/Pages/passecommande.dart';
 import 'package:flutter/material.dart';
 
 class PagePlats extends StatefulWidget {
@@ -76,7 +77,10 @@ class _PagePlatsState extends State<PagePlats> {
           actions: [
             TextButton(
               onPressed: () {
-               
+               Navigator.push(
+                context,
+                  MaterialPageRoute(builder: (context)=> PasseCommande(plat:plat))
+                );
               },
               child: const Text('Commander'),
             ),
